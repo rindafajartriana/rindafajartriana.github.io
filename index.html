@@ -150,7 +150,10 @@ $ contact --method email --address "rindafajartriana@gmail.com"
     </div>
 
     <footer>
-      <p>&copy; 2024 Rinda Fajar Triana | All Rights Reserved</p>
+      <p>&copy; <span id="current-year"></span> Rinda Fajar Triana | All Rights Reserved</p>
     </footer>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
