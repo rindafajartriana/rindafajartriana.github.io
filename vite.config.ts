@@ -19,7 +19,8 @@ export default defineConfig({
     // })
   ],
   build: {
-    chunkSizeWarningLimit: 3000
+    chunkSizeWarningLimit: 3000,
+    outDir: 'dist', // Default output directory
   },
   resolve: {
     alias: [
@@ -31,4 +32,5 @@ export default defineConfig({
       { find: '@type', replacement: '/src/type' },
     ],
   },
+  base: '/', 
 })
