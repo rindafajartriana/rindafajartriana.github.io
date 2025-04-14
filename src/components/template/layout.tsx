@@ -4,72 +4,131 @@ import Topbar from "@components/organisms/topbar";
 import { IRootState } from "@store/redux-collection";
 import { setIsOpenSidebar } from "@store/redux-collection/dummy";
 import moment from "moment";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { HiChevronDown, HiChevronUp, HiMenu, HiX } from 'react-icons/hi';
 
 const Layout = ({ children, name, accessType }: any) => {
   const dispatch = useDispatch();
+  const [openKendaraan, setOpenKendaraan] = useState(false);
+  const [openProperti, setOpenProperti] = useState(false);
+  const [openKargo, setOpenKargo] = useState(false);
+  const [openLainnya, setOpenLainnya] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const { isOpenSidebar: isOpen } = useSelector(
     (state: IRootState) => state.dummy
   );
 
   return (
-    // <div className="custom-body">
-    //   <div className="flex flex-col w-full">
-    //     <Topbar />
-    //     <div className="flex h-full font-poppins">
-    //       <Sidebar accessType={accessType} />
-    //       <div className="flex flex-col w-full bg-slate-200 font-roboto">
-    //         {
-    //           isOpen &&
-    //           <div onClick={() => dispatch(setIsOpenSidebar(!isOpen))} className="fixed visible md:invisible bg-black/50 backdrop-blur-sm z-10 w-full h-full" />
-    //         }
-    //         <div className="flex flex-col md:flex-row justify-between gap-2">
-    //           <div className="mt-3 items-end gap-3 w-fit mx-4">
-    //             <h1 className="whitespace-nowrap ">{name}</h1>
-    //             <h2 className="text-gray-500 whitespace-nowrap">{moment().format("dddd, DD MMMM YYYY")}</h2>
-    //           </div>
-    //           <div className="flex h-full items-end justify-end">
-    //             <div className="flex text-sm text-gray-500 mx-4 items-center gap-2">
-    //               <NavLink to="/admin/" className={() => ""}>Home</NavLink>
-    //               <ArrowRight width={14} />
-    //               <p className="whitespace-nowrap">{name}</p>
-    //             </div>
-    //           </div>
-    //         </div>
-    //         <div className="flex flex-col w-full h-full">
-    //           <div className="flex w-full h-full">
-    //             {children}
-    //           </div>
-    //           <div className="flex text-gray-500 gap-2 p-4 justify-between bg-white text-xs md:text-sm">
-    //             <p className="flex gap-2">
-    //               <span className="text-black font-semibold">Hak Cipta © 2025.Team 5R</span>
-    //               <span>PT. Sarana Makin Mulya.</span>
-    //             </p>
-    //             <p>Versi 1.0</p>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
     <div className="font-poppins bg-gray-50 min-h-screen flex flex-col">
       {/* Header Section */}
-      <header className="bg-blue-600 text-white p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <div>
-            <Link to="/" className="text-lg font-bold cursor-pointer">
-              CekPremi
-            </Link>
-          </div>
-          <div>
-            <button className="text-lg font-bold px-4 py-2 bg-blue-800 hover:bg-blue-700 rounded text-white">
-              Login
-            </button>
-          </div>
+      <header className="text-black p-4 border-b-2">
+      <div className="container mx-auto flex justify-between items-center">
+        {/* Logo */}
+        <Link to="/" className="text-lg font-bold cursor-pointer">
+          CekPremi
+        </Link>
+
+        {/* Burger Icon (mobile only) */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden text-2xl"
+        >
+          {mobileMenuOpen ? <HiX /> : <HiMenu />}
+        </button>
+
+        {/* Menu - Desktop */}
+        <div className="hidden md:flex items-center space-x-4">
+          {/* Dropdown Group */}
+          <DropdownMenu
+            label="Asuransi Kendaraan"
+            isOpen={openKendaraan}
+            setOpen={setOpenKendaraan}
+            links={[
+              { to: '/kendaraan/mobil', label: 'Mobil' },
+              { to: '/kendaraan/motor', label: 'Motor' },
+            ]}
+          />
+
+          <DropdownMenu
+            label="Asuransi Properti"
+            isOpen={openProperti}
+            setOpen={setOpenProperti}
+            links={[
+              { to: '/properti/rumah', label: 'Rumah' },
+              { to: '/properti/apartemen', label: 'Apartemen' },
+            ]}
+          />
+
+          <DropdownMenu
+            label="Asuransi Kargo"
+            isOpen={openKargo}
+            setOpen={setOpenKargo}
+            links={[
+              { to: '/kargo/domestik', label: 'Pengiriman Domestik' },
+              { to: '/kargo/internasional', label: 'Pengiriman Internasional' },
+              { to: '/kargo/lautan', label: 'Kargo Laut' },
+              { to: '/kargo/udara', label: 'Kargo Udara' },
+              { to: '/kargo/logistik-komersial', label: 'Logistik Komersial' },
+            ]}
+          />
+
+          <DropdownMenu
+            label="Asuransi Lainnya"
+            isOpen={openLainnya}
+            setOpen={setOpenLainnya}
+            links={[
+              { to: '/lainnya/perjalanan', label: 'Asuransi Perjalanan' },
+              { to: '/lainnya/kesehatan', label: 'Asuransi Kesehatan' },
+            ]}
+          />
         </div>
-      </header>
+
+        {/* Masuk Button - Desktop */}
+        <div className="hidden md:block">
+          <button className="text-sm font-bold px-4 py-2 bg-blue-800 hover:bg-blue-700 rounded text-white">
+            Masuk
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden mt-4 space-y-4">
+          {/* Masuk Button */}
+          <button className="w-full text-sm font-bold px-4 py-2 bg-blue-800 hover:bg-blue-700 rounded text-white">
+            Masuk
+          </button>
+
+          {/* Mobile Dropdowns */}
+          <MobileDropdown label="Asuransi Kendaraan" links={[
+            { to: '/kendaraan/mobil', label: 'Mobil' },
+            { to: '/kendaraan/motor', label: 'Motor' },
+          ]} />
+
+          <MobileDropdown label="Asuransi Properti" links={[
+            { to: '/properti/rumah', label: 'Rumah' },
+            { to: '/properti/apartemen', label: 'Apartemen' },
+          ]} />
+
+          <MobileDropdown label="Asuransi Kargo" links={[
+            { to: '/kargo/domestik', label: 'Pengiriman Domestik' },
+            { to: '/kargo/internasional', label: 'Pengiriman Internasional' },
+            { to: '/kargo/lautan', label: 'Kargo Laut' },
+            { to: '/kargo/udara', label: 'Kargo Udara' },
+            { to: '/kargo/logistik-komersial', label: 'Logistik Komersial' },
+          ]} />
+
+          <MobileDropdown label="Asuransi Lainnya" links={[
+            { to: '/lainnya/perjalanan', label: 'Asuransi Perjalanan' },
+            { to: '/lainnya/kesehatan', label: 'Asuransi Kesehatan' },
+          ]} />
+        </div>
+      )}
+    </header>
+
       <div className="flex w-full h-full">{children}</div>
       {/* Footer Section */}
       <footer className="bg-gray-900 text-white py-12 mt-16">
@@ -189,6 +248,64 @@ const Layout = ({ children, name, accessType }: any) => {
           &copy; {new Date().getFullYear()} CekPremi. All rights reserved.
         </div>
       </footer>
+    </div>
+  );
+};
+
+const DropdownMenu = ({ label, isOpen, setOpen, links }) => (
+  <div
+    className="relative"
+    onMouseEnter={() => setOpen(true)}
+    onMouseLeave={() => setOpen(false)}
+  >
+    <div className="flex items-center text-sm cursor-pointer">
+      <span className="whitespace-nowrap">{label}</span>
+      {isOpen ? (
+        <HiChevronUp className="ml-1 text-base" />
+      ) : (
+        <HiChevronDown className="ml-1 text-base" />
+      )}
+    </div>
+    {isOpen && (
+      <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg p-2 w-48 border text-sm z-10">
+        <ul>
+          {links.map((link, index) => (
+            <li key={index}>
+              <Link to={link.to} className="block px-4 py-2 hover:bg-gray-100">
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+);
+
+// Mobile Dropdown (accordion style)
+const MobileDropdown = ({ label, links }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="border rounded-md">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex justify-between items-center px-4 py-2 text-sm font-medium"
+      >
+        {label}
+        {open ? <HiChevronUp /> : <HiChevronDown />}
+      </button>
+      {open && (
+        <ul className="bg-white text-sm">
+          {links.map((link, index) => (
+            <li key={index}>
+              <Link to={link.to} className="block px-6 py-2 hover:bg-gray-100">
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
