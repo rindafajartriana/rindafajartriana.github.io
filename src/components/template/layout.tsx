@@ -47,7 +47,7 @@ const Layout = ({ children, name, accessType }: any) => {
             isOpen={openKendaraan}
             setOpen={setOpenKendaraan}
             links={[
-              { to: '/kendaraan/mobil', label: 'Mobil' },
+              { to: '/asuransi-kendaraan', label: 'Mobil' },
               { to: '/kendaraan/motor', label: 'Motor' },
             ]}
           />
@@ -104,7 +104,7 @@ const Layout = ({ children, name, accessType }: any) => {
 
           {/* Mobile Dropdowns */}
           <MobileDropdown label="Asuransi Kendaraan" links={[
-            { to: '/kendaraan/mobil', label: 'Mobil' },
+            { to: '/asuransi-kendaraan', label: 'Mobil' },
             { to: '/kendaraan/motor', label: 'Motor' },
           ]} />
 

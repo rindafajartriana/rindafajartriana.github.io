@@ -4,25 +4,46 @@ const AsuransiProperty = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    propertyAddress: "",
+    propertyUsage: "",
     propertyValue: "",
-    propertyType: "",
-    coverageAmount: "",
+    buildingClass: "",
+    fireExtinguisher: false,
+    claimExperience: "",
+    photos: [],
   });
 
   const [errors, setErrors] = useState({
     name: "",
     email: "",
+    propertyAddress: "",
+    propertyUsage: "",
     propertyValue: "",
-    propertyType: "",
-    coverageAmount: "",
+    buildingClass: "",
+    fireExtinguisher: "",
+    claimExperience: "",
+    photos: "",
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
+  };
+
+  const handleFileChange = (e) => {
+    const files = e.target.files;
+    if (files.length > 6) {
+      setErrors({ ...errors, photos: "Maksimal 6 foto" });
+    } else {
+      setFormData({
+        ...formData,
+        photos: Array.from(files),
+      });
+      setErrors({ ...errors, photos: "" });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -42,16 +63,24 @@ const AsuransiProperty = () => {
       validationErrors.email = "Email tidak valid.";
       isValid = false;
     }
+    if (!formData.propertyAddress) {
+      validationErrors.propertyAddress = "Alamat properti harus diisi.";
+      isValid = false;
+    }
+    if (!formData.propertyUsage) {
+      validationErrors.propertyUsage = "Tipe usaha harus diisi.";
+      isValid = false;
+    }
     if (!formData.propertyValue) {
       validationErrors.propertyValue = "Nilai properti harus diisi.";
       isValid = false;
     }
-    if (!formData.propertyType) {
-      validationErrors.propertyType = "Pilih tipe properti.";
+    if (!formData.buildingClass) {
+      validationErrors.buildingClass = "Kelas konstruksi harus diisi.";
       isValid = false;
     }
-    if (!formData.coverageAmount) {
-      validationErrors.coverageAmount = "Jumlah pertanggungan harus diisi.";
+    if (formData.photos.length < 2) {
+      validationErrors.photos = "Minimal 2 foto diperlukan.";
       isValid = false;
     }
 
@@ -114,13 +143,65 @@ const AsuransiProperty = () => {
             )}
           </div>
 
+          {/* Property Address */}
+          <div className="mb-4">
+            <label
+              htmlFor="propertyAddress"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Alamat Lokasi Properti
+            </label>
+            <input
+              type="text"
+              id="propertyAddress"
+              name="propertyAddress"
+              value={formData.propertyAddress}
+              onChange={handleInputChange}
+              className={`mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                errors.propertyAddress ? "border-red-500" : "border-gray-300"
+              }`}
+              placeholder="Masukkan alamat properti"
+            />
+            {errors.propertyAddress && (
+              <p className="text-red-500 text-sm mt-1">{errors.propertyAddress}</p>
+            )}
+          </div>
+
+          {/* Property Usage */}
+          <div className="mb-4">
+            <label
+              htmlFor="propertyUsage"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Objek Digunakan Untuk Jenis Usaha
+            </label>
+            <select
+              id="propertyUsage"
+              name="propertyUsage"
+              value={formData.propertyUsage}
+              onChange={handleInputChange}
+              className={`mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                errors.propertyUsage ? "border-red-500" : "border-gray-300"
+              }`}
+            >
+              <option value="">Pilih Jenis Usaha</option>
+              <option value="Residential">Rumah Tinggal</option>
+              <option value="Commercial">Toko</option>
+              <option value="Restaurant">Restoran</option>
+              <option value="Industrial">Pabrik</option>
+            </select>
+            {errors.propertyUsage && (
+              <p className="text-red-500 text-sm mt-1">{errors.propertyUsage}</p>
+            )}
+          </div>
+
           {/* Property Value */}
           <div className="mb-4">
             <label
               htmlFor="propertyValue"
               className="block text-sm font-medium text-gray-700"
             >
-              Nilai Properti
+              Nilai Properti (Bangunan dan Isi)
             </label>
             <input
               type="number"
@@ -138,54 +219,94 @@ const AsuransiProperty = () => {
             )}
           </div>
 
-          {/* Property Type */}
+          {/* Building Class */}
           <div className="mb-4">
             <label
-              htmlFor="propertyType"
+              htmlFor="buildingClass"
               className="block text-sm font-medium text-gray-700"
             >
-              Tipe Properti
+              Kelas Konstruksi Bangunan
             </label>
             <select
-              id="propertyType"
-              name="propertyType"
-              value={formData.propertyType}
+              id="buildingClass"
+              name="buildingClass"
+              value={formData.buildingClass}
               onChange={handleInputChange}
               className={`mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                errors.propertyType ? "border-red-500" : "border-gray-300"
+                errors.buildingClass ? "border-red-500" : "border-gray-300"
               }`}
             >
-              <option value="">Pilih Tipe Properti</option>
-              <option value="Residential">Perumahan</option>
-              <option value="Commercial">Komersial</option>
-              <option value="Industrial">Industri</option>
+              <option value="">Pilih Kelas Konstruksi</option>
+              <option value="1">Kelas 1</option>
+              <option value="2">Kelas 2</option>
+              <option value="3">Kelas 3</option>
             </select>
-            {errors.propertyType && (
-              <p className="text-red-500 text-sm mt-1">{errors.propertyType}</p>
+            {errors.buildingClass && (
+              <p className="text-red-500 text-sm mt-1">{errors.buildingClass}</p>
             )}
           </div>
 
-          {/* Coverage Amount */}
-          <div className="mb-6">
+          {/* Fire Extinguisher */}
+          <div className="mb-4 flex items-center">
+            <input
+              type="checkbox"
+              id="fireExtinguisher"
+              name="fireExtinguisher"
+              checked={formData.fireExtinguisher}
+              onChange={handleInputChange}
+              className="mr-2"
+            />
             <label
-              htmlFor="coverageAmount"
+              htmlFor="fireExtinguisher"
+              className="text-sm text-gray-700"
+            >
+              Memiliki Alat Pemadam Api Ringan
+            </label>
+          </div>
+
+          {/* Claim Experience */}
+          <div className="mb-4">
+            <label
+              htmlFor="claimExperience"
               className="block text-sm font-medium text-gray-700"
             >
-              Jumlah Pertanggungan
+              Pengalaman Klaim 3 Tahun Terakhir
             </label>
-            <input
-              type="number"
-              id="coverageAmount"
-              name="coverageAmount"
-              value={formData.coverageAmount}
+            <textarea
+              id="claimExperience"
+              name="claimExperience"
+              value={formData.claimExperience}
               onChange={handleInputChange}
               className={`mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                errors.coverageAmount ? "border-red-500" : "border-gray-300"
+                errors.claimExperience ? "border-red-500" : "border-gray-300"
               }`}
-              placeholder="Masukkan jumlah pertanggungan"
+              placeholder="Jelaskan pengalaman klaim (jika ada)"
             />
-            {errors.coverageAmount && (
-              <p className="text-red-500 text-sm mt-1">{errors.coverageAmount}</p>
+            {errors.claimExperience && (
+              <p className="text-red-500 text-sm mt-1">{errors.claimExperience}</p>
+            )}
+          </div>
+
+          {/* Photos */}
+          <div className="mb-4">
+            <label
+              htmlFor="photos"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Foto Bangunan (Minimal 2 Foto, Maksimal 6 Foto)
+            </label>
+            <input
+              type="file"
+              id="photos"
+              name="photos"
+              multiple
+              onChange={handleFileChange}
+              className={`mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                errors.photos ? "border-red-500" : "border-gray-300"
+              }`}
+            />
+            {errors.photos && (
+              <p className="text-red-500 text-sm mt-1">{errors.photos}</p>
             )}
           </div>
 

@@ -68,7 +68,12 @@ const Dashboard = () => {
       <div className="container mx-auto py-8">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 md:mx-[8rem] lg:grid-cols-6 lg:mx-[10rem] gap-y-2 -gap-x-2 place-items-center">
           {/* Asuransi Kendaraan */}
-          <div className="bg-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn">
+          <div
+            onClick={() => {
+              navigate("/asuransi-kendaraan");
+            }}
+            className="bg-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
+          >
             <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
               <Structure className="h-10 w-10 text-white" />
             </div>
@@ -78,7 +83,12 @@ const Dashboard = () => {
           </div>
 
           {/* Asuransi Properti */}
-          <div className="bg-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn">
+          <div
+            onClick={() => {
+              navigate("/asuransi-properti");
+            }}
+            className="bg-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
+          >
             <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
               <Building className="h-10 w-10 text-white" />
             </div>
