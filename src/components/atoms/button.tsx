@@ -7,6 +7,7 @@ interface Button {
   disabled?: boolean
   onClick?: (e: any) => void
   children?: string | ReactElement
+  type?: any
 }
 
 const Button = ({
@@ -14,11 +15,12 @@ const Button = ({
   isLoading,
   disabled,
   onClick,
-  children
+  children,
+  type
 }: Button) => {
   return (
     <button
-      type="button"
+      type={type ?? `button`}
       className={className}
       onClick={onClick}
       disabled={disabled || isLoading}

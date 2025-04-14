@@ -14,6 +14,10 @@ import { useDispatch } from "react-redux";
 import FormAdmin from "@pages/data-administrator/_form";
 import { useGetListUserQuery } from "@store/redux-collection/master-data";
 import { Link, useNavigate } from "react-router-dom";
+import { FaCar  } from "react-icons/fa";
+import { MdOutlineMapsHomeWork } from "react-icons/md";
+import { GiCargoShip } from "react-icons/gi";
+import { IoConstructOutline } from "react-icons/io5";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -21,7 +25,7 @@ const Dashboard = () => {
   return (
     <div className="w-full">
       {/* Slider Section */}
-      <div className="container mx-auto py-8 w-[60%]">
+      <div className="container mx-auto py-8 mt-16 w-[60%]">
         <Swiper
           modules={[Navigation, Autoplay]}
           spaceBetween={20}
@@ -54,7 +58,7 @@ const Dashboard = () => {
       </div>
 
       {/* Hero Section (Banner) */}
-      <div className="bg-blue-500 text-white text-center py-8">
+      <div className="bg-gradient-to-r from-blue-800 to-blue-500 text-white text-center py-8">
         <h1 className="text-2xl font-semibold mb-2">Cek Premi Asuransi Anda</h1>
         <p className="text-xl mb-2">
           Bandingkan premi asuransi terbaik dari berbagai penyedia.
@@ -72,10 +76,10 @@ const Dashboard = () => {
             onClick={() => {
               navigate("/asuransi-kendaraan");
             }}
-            className="bg-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
+            className="bg-gradient-to-r from-blue-800 to-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
           >
             <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
-              <Structure className="h-10 w-10 text-white" />
+              <FaCar className="h-10 w-10 text-white" />
             </div>
             <h2 className="font-bold text-xs text-white transform transition duration-200 group-hover:scale-90">
               Asuransi Kendaraan
@@ -87,28 +91,42 @@ const Dashboard = () => {
             onClick={() => {
               navigate("/asuransi-properti");
             }}
-            className="bg-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
+            className="bg-gradient-to-r from-blue-800 to-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
           >
             <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
-              <Building className="h-10 w-10 text-white" />
+              <MdOutlineMapsHomeWork className="h-10 w-10 text-white" />
             </div>
             <h2 className="font-bold text-xs text-white transform transition duration-200 group-hover:scale-90">
               Asuransi Properti
             </h2>
           </div>
 
+          <div
+            onClick={() => {
+              navigate("/asuransi-kargo");
+            }}
+            className="bg-gradient-to-r from-blue-800 to-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
+          >
+            <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
+              <GiCargoShip className="h-10 w-10 text-white" />
+            </div>
+            <h2 className="font-bold text-xs text-white transform transition duration-200 group-hover:scale-90">
+              Asuransi Kargo
+            </h2>
+          </div>
+
           {/* Asuransi Kargo */}
-          {Array.from({ length: 16 }).map((_, index) => (
+          {Array.from({ length: 15 }).map((_, index) => (
             <div
               key={index}
-              className={`bg-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn`}
+              className={`bg-gradient-to-r from-blue-800 to-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn`}
               style={{ animationDelay: `${index * 50}ms` }} // ✨ Delay agar masuknya bertahap
             >
               <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
-                <Calendar className="h-10 w-10 text-white" />
+                <IoConstructOutline className="h-10 w-10 text-white" />
               </div>
               <h2 className="font-bold text-xs text-white transform transition duration-200 group-hover:scale-90">
-                Asuransi Kargo
+                Coming Soon
               </h2>
             </div>
           ))}

@@ -7,7 +7,10 @@ import moment from "moment";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { HiChevronDown, HiChevronUp, HiMenu, HiX } from 'react-icons/hi';
+import { HiChevronDown, HiChevronUp, HiMenu, HiX } from "react-icons/hi";
+import ModalLogin from "./login";
+import { signOutCust } from "@store/redux-collection/sign-in";
+import { clearPopup } from "@store/redux-collection/popup";
 
 const Layout = ({ children, name, accessType }: any) => {
   const dispatch = useDispatch();
@@ -16,6 +19,9 @@ const Layout = ({ children, name, accessType }: any) => {
   const [openKargo, setOpenKargo] = useState(false);
   const [openLainnya, setOpenLainnya] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
+  const { dataCust } = useSelector((state: IRootState) => state.signIn);
 
   const { isOpenSidebar: isOpen } = useSelector(
     (state: IRootState) => state.dummy
@@ -24,110 +30,181 @@ const Layout = ({ children, name, accessType }: any) => {
   return (
     <div className="font-poppins bg-gray-50 min-h-screen flex flex-col">
       {/* Header Section */}
-      <header className="text-black p-4 border-b-2">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="text-lg font-bold cursor-pointer">
-          CekPremi
-        </Link>
+      <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md text-black p-4 border-b-2">
+        <div className="container mx-auto flex justify-between items-center">
+          {/* Logo */}
+          <Link to="/" className="text-lg font-bold cursor-pointer">
+            CekPremi
+          </Link>
 
-        {/* Burger Icon (mobile only) */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-2xl"
-        >
-          {mobileMenuOpen ? <HiX /> : <HiMenu />}
-        </button>
-
-        {/* Menu - Desktop */}
-        <div className="hidden md:flex items-center space-x-4">
-          {/* Dropdown Group */}
-          <DropdownMenu
-            label="Asuransi Kendaraan"
-            isOpen={openKendaraan}
-            setOpen={setOpenKendaraan}
-            links={[
-              { to: '/asuransi-kendaraan', label: 'Mobil' },
-              { to: '/kendaraan/motor', label: 'Motor' },
-            ]}
-          />
-
-          <DropdownMenu
-            label="Asuransi Properti"
-            isOpen={openProperti}
-            setOpen={setOpenProperti}
-            links={[
-              { to: '/properti/rumah', label: 'Rumah' },
-              { to: '/properti/apartemen', label: 'Apartemen' },
-            ]}
-          />
-
-          <DropdownMenu
-            label="Asuransi Kargo"
-            isOpen={openKargo}
-            setOpen={setOpenKargo}
-            links={[
-              { to: '/kargo/domestik', label: 'Pengiriman Domestik' },
-              { to: '/kargo/internasional', label: 'Pengiriman Internasional' },
-              { to: '/kargo/lautan', label: 'Kargo Laut' },
-              { to: '/kargo/udara', label: 'Kargo Udara' },
-              { to: '/kargo/logistik-komersial', label: 'Logistik Komersial' },
-            ]}
-          />
-
-          <DropdownMenu
-            label="Asuransi Lainnya"
-            isOpen={openLainnya}
-            setOpen={setOpenLainnya}
-            links={[
-              { to: '/lainnya/perjalanan', label: 'Asuransi Perjalanan' },
-              { to: '/lainnya/kesehatan', label: 'Asuransi Kesehatan' },
-            ]}
-          />
-        </div>
-
-        {/* Masuk Button - Desktop */}
-        <div className="hidden md:block">
-          <button className="text-sm font-bold px-4 py-2 bg-blue-800 hover:bg-blue-700 rounded text-white">
-            Masuk
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden mt-4 space-y-4">
-          {/* Masuk Button */}
-          <button className="w-full text-sm font-bold px-4 py-2 bg-blue-800 hover:bg-blue-700 rounded text-white">
-            Masuk
+          {/* Burger Icon (mobile only) */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-2xl"
+          >
+            {mobileMenuOpen ? <HiX /> : <HiMenu />}
           </button>
 
-          {/* Mobile Dropdowns */}
-          <MobileDropdown label="Asuransi Kendaraan" links={[
-            { to: '/asuransi-kendaraan', label: 'Mobil' },
-            { to: '/kendaraan/motor', label: 'Motor' },
-          ]} />
+          {/* Menu - Desktop */}
+          <div className="hidden md:flex items-center space-x-4">
+            {/* Dropdown Group */}
+            <DropdownMenu
+              label="Asuransi Kendaraan"
+              isOpen={openKendaraan}
+              setOpen={setOpenKendaraan}
+              links={[
+                { to: "/asuransi-kendaraan", label: "Mobil" },
+                { to: "/kendaraan/motor", label: "Motor" },
+              ]}
+            />
 
-          <MobileDropdown label="Asuransi Properti" links={[
-            { to: '/properti/rumah', label: 'Rumah' },
-            { to: '/properti/apartemen', label: 'Apartemen' },
-          ]} />
+            <DropdownMenu
+              label="Asuransi Properti"
+              isOpen={openProperti}
+              setOpen={setOpenProperti}
+              links={[
+                { to: "/properti/rumah", label: "Rumah" },
+                { to: "/properti/apartemen", label: "Apartemen" },
+              ]}
+            />
 
-          <MobileDropdown label="Asuransi Kargo" links={[
-            { to: '/kargo/domestik', label: 'Pengiriman Domestik' },
-            { to: '/kargo/internasional', label: 'Pengiriman Internasional' },
-            { to: '/kargo/lautan', label: 'Kargo Laut' },
-            { to: '/kargo/udara', label: 'Kargo Udara' },
-            { to: '/kargo/logistik-komersial', label: 'Logistik Komersial' },
-          ]} />
+            <DropdownMenu
+              label="Asuransi Kargo"
+              isOpen={openKargo}
+              setOpen={setOpenKargo}
+              links={[
+                { to: "/kargo/domestik", label: "Pengiriman Domestik" },
+                {
+                  to: "/kargo/internasional",
+                  label: "Pengiriman Internasional",
+                },
+                { to: "/kargo/lautan", label: "Kargo Laut" },
+                { to: "/kargo/udara", label: "Kargo Udara" },
+                {
+                  to: "/kargo/logistik-komersial",
+                  label: "Logistik Komersial",
+                },
+              ]}
+            />
 
-          <MobileDropdown label="Asuransi Lainnya" links={[
-            { to: '/lainnya/perjalanan', label: 'Asuransi Perjalanan' },
-            { to: '/lainnya/kesehatan', label: 'Asuransi Kesehatan' },
-          ]} />
+            <DropdownMenu
+              label="Asuransi Lainnya"
+              isOpen={openLainnya}
+              setOpen={setOpenLainnya}
+              links={[
+                { to: "/lainnya/perjalanan", label: "Asuransi Perjalanan" },
+                { to: "/lainnya/kesehatan", label: "Asuransi Kesehatan" },
+              ]}
+            />
+          </div>
+
+          {/* Masuk Button - Desktop */}
+          {/* Masuk / Akun Saya Button - Desktop */}
+          <div className="hidden md:block relative">
+            {dataCust?.token ? (
+              <>
+                <button
+                  onClick={() =>
+                    setIsAccountDropdownOpen(!isAccountDropdownOpen)
+                  }
+                  className="text-sm font-bold px-4 py-2 bg-gradient-to-r from-blue-800 to-blue-500 hover:bg-blue-700 rounded text-white"
+                >
+                  Akun Saya
+                </button>
+                {isAccountDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg text-black text-sm z-50">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setIsAccountDropdownOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      to="/premi-saya"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setIsAccountDropdownOpen(false)}
+                    >
+                      Premi Saya
+                    </Link>
+                    <button
+                      onClick={() => {
+                        dispatch(signOutCust());
+                        setIsAccountDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                    >
+                      Keluar
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <button
+                onClick={() => setIsLoginModalOpen(true)}
+                className="text-sm font-bold px-4 py-2 bg-gradient-to-r from-blue-800 to-blue-500 hover:bg-blue-700 rounded text-white"
+              >
+                Masuk
+              </button>
+            )}
+          </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-4 space-y-4">
+            {/* Masuk Button */}
+            <button
+              onClick={() => setIsLoginModalOpen(true)}
+              className="w-full text-sm font-bold px-4 py-2 bg-blue-800 hover:bg-blue-700 rounded text-white"
+            >
+              {dataCust?.token ? "Akun Saya" : "Masuk"}
+            </button>
+
+            {/* Mobile Dropdowns */}
+            <MobileDropdown
+              label="Asuransi Kendaraan"
+              links={[
+                { to: "/asuransi-kendaraan", label: "Mobil" },
+                { to: "/kendaraan/motor", label: "Motor" },
+              ]}
+            />
+
+            <MobileDropdown
+              label="Asuransi Properti"
+              links={[
+                { to: "/properti/rumah", label: "Rumah" },
+                { to: "/properti/apartemen", label: "Apartemen" },
+              ]}
+            />
+
+            <MobileDropdown
+              label="Asuransi Kargo"
+              links={[
+                { to: "/kargo/domestik", label: "Pengiriman Domestik" },
+                {
+                  to: "/kargo/internasional",
+                  label: "Pengiriman Internasional",
+                },
+                { to: "/kargo/lautan", label: "Kargo Laut" },
+                { to: "/kargo/udara", label: "Kargo Udara" },
+                {
+                  to: "/kargo/logistik-komersial",
+                  label: "Logistik Komersial",
+                },
+              ]}
+            />
+
+            <MobileDropdown
+              label="Asuransi Lainnya"
+              links={[
+                { to: "/lainnya/perjalanan", label: "Asuransi Perjalanan" },
+                { to: "/lainnya/kesehatan", label: "Asuransi Kesehatan" },
+              ]}
+            />
+          </div>
+        )}
+      </header>
 
       <div className="flex w-full h-full">{children}</div>
       {/* Footer Section */}
@@ -248,6 +325,9 @@ const Layout = ({ children, name, accessType }: any) => {
           &copy; {new Date().getFullYear()} CekPremi. All rights reserved.
         </div>
       </footer>
+      {isLoginModalOpen && (
+        <ModalLogin onClose={() => setIsLoginModalOpen(false)} />
+      )}
     </div>
   );
 };

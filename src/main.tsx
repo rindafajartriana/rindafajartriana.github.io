@@ -9,6 +9,7 @@ import { store, persistor } from './store/index.tsx'
 import GlobalAlert from './components/organisms/globalAlert.tsx'
 import Popup from '@components/organisms/popup.tsx'
 import ImagePreview from '@components/atoms/imagePreview.tsx'
+import WhatsAppIcon from '@components/molecules/whatsappIcon.tsx'
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <GlobalAlert />
       <Popup />
       <ImagePreview />
+      <WhatsAppIcon />
     </PersistGate>
   </Provider>
 )
