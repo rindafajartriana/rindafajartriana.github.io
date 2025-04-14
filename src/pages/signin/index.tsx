@@ -42,10 +42,10 @@ const SigninPage = () => {
 
   return (
     <div className="absolute flex w-full h-full p-2 items-center justify-center bg-slate-200 font-roboto">
-      <div className="flex flex-col bg-white custom-shadow w-fit h-fit p-12 gap-1 rounded min-w-full md:min-w-[22rem] border-t-2 border-t-green-700">
+      <div className="flex flex-col bg-white custom-shadow w-fit h-fit p-12 gap-1 rounded min-w-full md:min-w-[22rem] border-t-2 border-t-blue-500">
         <div className="w-full flex justify-center">
           <div className="mb-10">
-            <Img src={baseUrl("/img/5r.png")} className="w-32 h-32" />
+            <Img src={baseUrl("/img/tree.svg")} className="w-32 h-32" />
           </div>
         </div>
         {/* <p className="text-sm">Selamat datang silahkan masuk untuk mengakses sistem</p> */}
@@ -80,7 +80,7 @@ const SigninPage = () => {
           </Button>
         </div>
         <div className="mt-6 flex justify-center text-gray-500 text-sm">
-          <p>Hak Cipta © 2025 . Team 5R</p>
+          <p>Hak Cipta © 2025 . Cek Premi</p>
         </div>
       </div>
     </div>

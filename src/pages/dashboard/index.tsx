@@ -70,7 +70,7 @@ const Dashboard = () => {
 
       {/* Content Section */}
       <div className="container mx-auto py-8">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 md:mx-[8rem] lg:grid-cols-6 lg:mx-[10rem] gap-y-2 -gap-x-2 place-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 md:mx-[8rem] lg:grid-cols-6 lg:mx-[10rem] gap-y-2 place-items-center">
           {/* Asuransi Kendaraan */}
           <div
             onClick={() => {
