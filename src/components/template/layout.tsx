@@ -1,4 +1,4 @@
-import { ArrowRight } from "@assets/icons/_index";
+import { ArrowRight, Ojk } from "@assets/icons/_index";
 import Sidebar from "@components/organisms/sidebar";
 import Topbar from "@components/organisms/topbar";
 import { IRootState } from "@store/redux-collection";
@@ -11,7 +11,11 @@ import { HiChevronDown, HiChevronUp, HiMenu, HiX } from "react-icons/hi";
 import ModalLogin from "./login";
 import { signOutCust } from "@store/redux-collection/sign-in";
 import { clearPopup } from "@store/redux-collection/popup";
-import WhatsAppIcon from '@components/molecules/whatsappIcon.tsx'
+import WhatsAppIcon from "@components/molecules/whatsappIcon.tsx";
+import { IoLogoFacebook, IoLogoInstagram, IoLogoYoutube } from "react-icons/io";
+import { FaWhatsapp } from "react-icons/fa";
+import { MdPayment } from "react-icons/md";
+import { RiCustomerServiceLine } from "react-icons/ri";
 
 const Layout = ({ children, name, accessType }: any) => {
   const dispatch = useDispatch();
@@ -275,32 +279,43 @@ const Layout = ({ children, name, accessType }: any) => {
 
           {/* Legal & Social */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Informasi Tambahan</h3>
+            <h3 className="text-lg font-semibold">Informasi Tambahan</h3>
             <ul className="space-y-2">
-              <li>✔️ Berizin dan diawasi oleh OJK</li>
+              <Ojk />
+
+              <li>✔️ Berizin dan diawasi oleh Otorisasi Jasa Keuangan (OJK)</li>
+
               <li>
                 <strong>Pengaduan Konsumen:</strong>
                 <br />
-                Direktorat Jenderal Perlindungan Konsumen & Tertib Niaga, <br />
-                Kementerian Perdagangan RI.
+                Direktorat Jenderal Perlindungan Konsumen & Tertib Niaga,
                 <br />
-                WhatsApp:{" "}
-                <a
-                  href="https://wa.me/6285311111010"
-                  className="text-blue-400 hover:underline"
-                >
-                  0853-1111-1010
-                </a>
+                Kementerian Perdagangan RI.
+                <div className="flex items-center gap-1 mt-1">
+                  <FaWhatsapp className="h-6 w-6" />
+                  <span>WhatsApp:</span>
+                  <a
+                    href="https://wa.me/6285311111010"
+                    className="text-blue-400 hover:underline"
+                  >
+                    0853-1111-1010
+                  </a>
+                </div>
               </li>
+
               <li>
-                <strong>Metode Pembayaran:</strong> Transfer, Kartu Kredit,
-                Cicilan 0%
+                <div className="flex items-center gap-1 mt-1">
+                  <MdPayment className="h-6 w-6" />
+                  <strong>Metode Pembayaran:</strong> Transfer, Kartu Kredit,
+                  Cicilan 0%
+                </div>
               </li>
-              <li>
+
+              <li className="flex gap-2">
                 <a href="#" className="text-blue-400 hover:underline">
                   Syarat & Ketentuan
-                </a>{" "}
-                |{" "}
+                </a>
+                <span>|</span>
                 <a href="#" className="text-blue-400 hover:underline">
                   Kebijakan Privasi
                 </a>
@@ -308,16 +323,30 @@ const Layout = ({ children, name, accessType }: any) => {
             </ul>
 
             {/* Social Media */}
-            <div className="mt-4 flex space-x-4">
-              <a href="#" className="hover:text-blue-400">
-                Facebook
-              </a>
-              <a href="#" className="hover:text-pink-400">
-                Instagram
-              </a>
-              <a href="#" className="hover:text-red-500">
-                YouTube
-              </a>
+            <div className="mt-2 flex space-x-6">
+              {/* Facebook */}
+              <div className="flex items-center space-x-1">
+                <IoLogoFacebook className="h-6 w-6" />
+                <a href="#" className="hover:text-blue-400">
+                  Facebook
+                </a>
+              </div>
+
+              {/* Instagram */}
+              <div className="flex items-center space-x-1">
+                <IoLogoInstagram className="h-6 w-6" />
+                <a href="#" className="hover:text-pink-400">
+                  Instagram
+                </a>
+              </div>
+
+              {/* YouTube */}
+              <div className="flex items-center space-x-1">
+                <IoLogoYoutube className="h-6 w-6" />
+                <a href="#" className="hover:text-red-500">
+                  YouTube
+                </a>
+              </div>
             </div>
           </div>
         </div>

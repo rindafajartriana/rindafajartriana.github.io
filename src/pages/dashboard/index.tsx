@@ -14,14 +14,17 @@ import { useDispatch } from "react-redux";
 import FormAdmin from "@pages/data-administrator/_form";
 import { useGetListUserQuery } from "@store/redux-collection/master-data";
 import { Link, useNavigate } from "react-router-dom";
-import { FaCar  } from "react-icons/fa";
+import { FaCar } from "react-icons/fa";
 import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { GiCargoShip } from "react-icons/gi";
 import { IoConstructOutline } from "react-icons/io5";
+import { FaShip } from "react-icons/fa6";
+import { SiCodeship } from "react-icons/si";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="w-full">
       {/* Slider Section */}
@@ -79,7 +82,7 @@ const Dashboard = () => {
             className="bg-gradient-to-r from-blue-800 to-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
           >
             <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
-              <FaCar className="h-10 w-10 text-white" />
+              <FaCar className="h-12 w-12 text-white" />
             </div>
             <h2 className="font-bold text-xs text-white transform transition duration-200 group-hover:scale-90">
               Asuransi Kendaraan
@@ -94,7 +97,7 @@ const Dashboard = () => {
             className="bg-gradient-to-r from-blue-800 to-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
           >
             <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
-              <MdOutlineMapsHomeWork className="h-10 w-10 text-white" />
+              <MdOutlineMapsHomeWork className="h-12 w-12 text-white" />
             </div>
             <h2 className="font-bold text-xs text-white transform transition duration-200 group-hover:scale-90">
               Asuransi Properti
@@ -108,25 +111,31 @@ const Dashboard = () => {
             className="bg-gradient-to-r from-blue-800 to-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn"
           >
             <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
-              <GiCargoShip className="h-10 w-10 text-white" />
+              <GiCargoShip className="h-12 w-12 text-white" />
             </div>
             <h2 className="font-bold text-xs text-white transform transition duration-200 group-hover:scale-90">
               Asuransi Kargo
             </h2>
           </div>
 
-          {/* Asuransi Kargo */}
+          {/* Asuransi Example */}
           {Array.from({ length: 15 }).map((_, index) => (
             <div
               key={index}
+              // onClick={() => navigate("/asuransi-kargo")}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
               className={`bg-gradient-to-r from-blue-800 to-blue-500 p-4 rounded-full shadow-lg text-center flex flex-col items-center justify-center w-36 h-36 group transition duration-200 hover:shadow-[0_4px_15px_rgba(0,0,0,0.5)] hover:cursor-pointer animate-scaleIn`}
-              style={{ animationDelay: `${index * 50}ms` }} // ✨ Delay agar masuknya bertahap
             >
               <div className="flex justify-center mb-2 transform transition duration-200 group-hover:scale-90">
-                <IoConstructOutline className="h-10 w-10 text-white" />
+                {isHovered ? (
+                  <IoConstructOutline className="h-12 w-12 text-white" />
+                ) : (
+                  <FaShip className="h-12 w-12 text-white" />
+                )}
               </div>
               <h2 className="font-bold text-xs text-white transform transition duration-200 group-hover:scale-90">
-                Coming Soon
+                {isHovered ? "Under Construction" : "Asuransi ....."}
               </h2>
             </div>
           ))}

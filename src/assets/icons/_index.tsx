@@ -27,6 +27,7 @@ import CloseIcon from "@assets/icons/close.svg?react";
 import BellIcon from "@assets/icons/bell.svg?react";
 import EyeIcon from "@assets/icons/eye.svg?react";
 import HomeInsurance from "@assets/icons/home-insurance.svg?react";
+import Ojk from "@assets/icons/ojk.svg?react";
 
 
 export {
@@ -56,5 +57,6 @@ export {
   CloseIcon,
   BellIcon,
   EyeIcon,
-  HomeInsurance
+  HomeInsurance,
+  Ojk
 };
