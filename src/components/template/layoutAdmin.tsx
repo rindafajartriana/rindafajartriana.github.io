@@ -41,8 +41,8 @@ const Layout = ({ children, name, accessType }: any) => {
               </div>
               <div className="flex text-gray-500 gap-2 p-4 justify-between bg-white text-xs md:text-sm">
                 <p className="flex gap-2">
-                  <span className="text-black font-semibold">Hak Cipta © 2025.Team 5R</span>
-                  <span>PT. Sarana Makin Mulya.</span>
+                  <span className="text-black font-semibold">Hak Cipta © 2025. CekPremi Admin</span>
+                  {/* <span>PT. ABC.</span> */}
                 </p>
                 <p>Versi 1.0</p>
               </div>

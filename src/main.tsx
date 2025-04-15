@@ -18,7 +18,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <GlobalAlert />
       <Popup />
       <ImagePreview />
-      <WhatsAppIcon />
     </PersistGate>
   </Provider>
 )

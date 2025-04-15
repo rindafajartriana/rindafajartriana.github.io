@@ -39,7 +39,7 @@ const RecrusiveSidebar = ({
               to={idx?.child ? "#" : `/admin/${idx?.path}`}
               className={({ isActive }) => {
                 return `
-                  ${(isActive && !idx?.child) ? "bg-green-700 text-white rounded-lg bg-opacity-80" : (isActive && defaultOpenId?.includes?.(idx?.id)) ? "text-green-300" : ""}
+                  ${(isActive && !idx?.child) ? "bg-blue-800 text-white rounded-lg bg-opacity-80" : (isActive && defaultOpenId?.includes?.(idx?.id)) ? "text-blue-300" : ""}
                   flex items-center justify-between w-full whitespace-nowrap overflow-hidden overflow-ellipsis p-2 hover:text-white cursor-pointer
                 `
               }}
@@ -129,8 +129,8 @@ const Sidebar = ({ accessType }) => {
         style={{ scrollbarWidth: "thin" }}
       >
         <div className="flex flex-col h-full">
-          <div className="visible mx-5 min-h-[3.3rem] md:min-h-0 pb-1 md:invisible md:h-0 md:p-0 mb-3 md:mb-0 cursor-pointer rounded-lg bg-slate-800 hover:bg-green-600 hover:bg-opacity-30 text-white overflow-hidden">
-            <NavLink to="/admin/profile" className={({ isActive }) => `p-2 flex items-center gap-2 ${isActive ? "bg-green-800 text-white" : ""}`}>
+          <div className="visible mx-5 min-h-[3.3rem] md:min-h-0 pb-1 md:invisible md:h-0 md:p-0 mb-3 md:mb-0 cursor-pointer rounded-lg bg-slate-800 hover:bg-blue-600 hover:bg-opacity-30 text-white overflow-hidden">
+            <NavLink to="/admin/profile" className={({ isActive }) => `p-2 flex items-center gap-2 ${isActive ? "bg-blue-800 text-white" : ""}`}>
               <div className="min-w-[2.3rem] h-[2.3rem] bg-gray-400 flex items-center justify-center rounded-full">{getInitial}</div>
               <div className="whitespace-nowrap overflow-hidden overflow-ellipsis">{userInfo?.fullname}</div>
             </NavLink>

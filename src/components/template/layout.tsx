@@ -11,6 +11,7 @@ import { HiChevronDown, HiChevronUp, HiMenu, HiX } from "react-icons/hi";
 import ModalLogin from "./login";
 import { signOutCust } from "@store/redux-collection/sign-in";
 import { clearPopup } from "@store/redux-collection/popup";
+import WhatsAppIcon from '@components/molecules/whatsappIcon.tsx'
 
 const Layout = ({ children, name, accessType }: any) => {
   const dispatch = useDispatch();
@@ -328,6 +329,7 @@ const Layout = ({ children, name, accessType }: any) => {
       {isLoginModalOpen && (
         <ModalLogin onClose={() => setIsLoginModalOpen(false)} />
       )}
+      <WhatsAppIcon />
     </div>
   );
 };

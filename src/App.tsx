@@ -11,6 +11,7 @@ import { useCallback } from "react";
 import AsuransiProperty from "@pages/asuransi-properti";
 import AsuransiKendaraan from "@pages/asuransi-kendaraan";
 import AsuransiKargo from "@pages/asuransi-kargo";
+import ScrollToTop from "@helpers/scrollToTop";
 
 function App() {
   const privateRoutes = useSelector((state: IRootState) => state.dummy.privateRoutes);
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* CUSTOMER ROUTES */}
         <Route path="/" element={<AuthOutlet />}>

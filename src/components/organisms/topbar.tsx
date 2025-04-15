@@ -43,7 +43,7 @@ const Navbar = ({ isOpen, setIsOpen }) => {
 
   return (
     <div className="relative md:w-fit md:h-full overflow-hidden md:overflow-visible" ref={ref}>
-      <div className="h-full flex items-center px-4 w-fit max-w-[230px] gap-2 hover:bg-green-500 cursor-pointer"
+      <div className="h-full flex items-center px-4 w-fit max-w-[230px] gap-2 hover:bg-blue-800 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="bg-slate-800 flex items-center justify-center w-8 h-8 rounded-full uppercase text-sm">
@@ -134,7 +134,7 @@ const Message = () => {
 
   return (
     <div ref={ref}>
-      <div className="relative hover:bg-green-500 hover:bg-opacity-50 p-1 rounded-full hover:cursor-pointer"
+      <div className="relative hover:bg-blue-800 hover:bg-opacity-50 p-1 rounded-full hover:cursor-pointer"
         onClick={() => {
           setIsOpen(!isOpen)
           onRead()
@@ -227,7 +227,7 @@ const Notification = () => {
   }
   return (
     <div ref={ref}>
-      <div className="relative hover:bg-green-500 hover:bg-opacity-50 p-1 rounded-full hover:cursor-pointer"
+      <div className="relative hover:bg-blue-800 hover:bg-opacity-50 p-1 rounded-full hover:cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         {
@@ -271,10 +271,10 @@ const Topbar = () => {
     // <div className={`h-11 bg-gradient-to-r from-green-700 to-green-600 shadow shadow-black z-20 flex text-xl font-bold text-white ${!isOpenSidebar ? "pl-12" : "pl-12 md:pl-6"}`}>
     //   <div className="flex justify-between w-full items-center">
     <div className={`h-11 z-20 flex text-xl font-bold text-white mb-1`}>
-      <div className={`flex h-11 justify-between w-full items-center bg-gradient-to-r from-green-700 to-green-600 shadow shadow-black fixed ${!isOpenSidebar ? "pl-12" : "pl-12 md:pl-6"}`}>
+      <div className={`flex h-11 justify-between w-full items-center bg-gradient-to-r from-blue-800 to-blue-500 shadow shadow-black fixed ${!isOpenSidebar ? "pl-12" : "pl-12 md:pl-6"}`}>
         <div className="flex gap-2 items-center">
-          <Img src={baseUrl("/img/5r.png")} className="w-7 h-7" />
-          <p className="py-2 text-[2rem] font-roboto-condensed">5R</p>
+          {/* <Img src={baseUrl("/img/5r.png")} className="w-7 h-7" /> */}
+          <p className="py-2 text-[2rem] font-roboto-condensed">CekPremi</p>
         </div>
         <div className="flex items-center h-full gap-2 mr-2">
           <Message />
