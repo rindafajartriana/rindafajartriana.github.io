@@ -1,0 +1,1 @@
+export const accesType = ["SU", "ADMIN", "PENGURUS", "ANGGOTA"]

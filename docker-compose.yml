@@ -1,0 +1,17 @@
+services:
+    insurance-react:
+      container_name: insurance-react
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - 3010:3010
+      networks:
+        - backend
+      environment:
+        NODE_ENV: production
+      restart: always
+networks:
+  backend:
+    name: micro__services_network
+    external: true
